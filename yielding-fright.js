@@ -9,6 +9,7 @@ window.oncontextmenu = function(event) {
 const array = words.toUpperCase().replace(/[?.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(" ");
 let written = [];
 let wordSize = 12;
+let circleColour = 0;
 
 function setup() {
   createCanvas(600, 600).mousePressed(writeWord);
@@ -17,14 +18,28 @@ function setup() {
 function draw() {
   background(220);
   for (let w of written) {
+    smooth();
+    noFill();
+    stroke(circleColour);
+    circle(mouseX, mouseY, wordSize);
     textSize(w.size);
+    noStroke();
     fill(w.colour);
     w.display();
   }
 }
 
+function mouseClicked() {
+  changeColourAndWrite();
+}
+
 function mouseDragged() {
+  changeColourAndWrite();
+}
+
+function changeColourAndWrite() {
   let clickType = (mouseButton === LEFT) ? true : false;
+  circleColour = clickType ? 0 : 255;
   writeWord(clickType);
 }
 
@@ -51,10 +66,8 @@ function findWord() {
 function writeWord(clickType) {
   const w = new Word();
   let str = findWord();
-  let colour = 0;
-  if (!clickType) {
-    colour = 255;
-  }
+  let colour = !clickType ? 255 : 0;
+
   written.push(w.setXYAndString(mouseX-20, 
                                 mouseY, 
                                 str, 
