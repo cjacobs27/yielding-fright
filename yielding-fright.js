@@ -37,6 +37,10 @@ function mouseDragged() {
   changeColourAndWrite();
 }
 
+function doubleClicked() {
+  console.log('hey gurl');
+}
+
 function changeColourAndWrite() {
   let clickType = (mouseButton === LEFT) ? true : false;
   circleColour = clickType ? 0 : 255;
@@ -67,7 +71,11 @@ function writeWord(clickType) {
   const w = new Word();
   let str = findWord();
   let colour = !clickType ? 255 : 0;
-
+  // Hold space to 'erase' (write in background colour)
+  if (keyIsDown(32)) {
+    colour = 220;
+    circleColour = 220;
+  }
   written.push(w.setXYAndString(mouseX-20, 
                                 mouseY, 
                                 str, 
