@@ -29,16 +29,12 @@ function draw() {
   }
 }
 
-function mouseClicked() {
+function mousePressed() {
   changeColourAndWrite();
 }
 
 function mouseDragged() {
   changeColourAndWrite();
-}
-
-function doubleClicked() {
-  console.log('hey gurl');
 }
 
 function changeColourAndWrite() {
